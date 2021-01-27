@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Dmitry Korovin](https://up.htmlacademy.ru/javascript/22/user/974243).
-* Наставник: `Неизвестно`.
+* Наставник: [Artik Man](https://htmlacademy.ru/profile/id1445657).
 
 ---
 
