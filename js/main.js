@@ -1,18 +1,19 @@
 //Generate Random Number
 
 const getRandomNumber = (a = 0, b = 0) => {
-  const min = (a < b) ? a : b;
-  const max = (a > b) ? a : b;
+  const min = Math.ceil(Math.min(a, b));
+  const max = Math.floor(Math.max(a, b));
 
-  // min = Math.ceil(min);
-  // max = Math.floor(max);
+  // * Another solution
+  // const min = Math.ceil((a < b) ? a : b);
+  // const max = Math.floor((a >= b) ? a : b);
 
   if (min < 0 || max < 0) return alert('Введите корректный диапазон');
 
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-getRandomNumber(1, 20); // for ESLint Validation
+getRandomNumber(201, 20); // for ESLint Validation
 
 //Check Max String Length
 
