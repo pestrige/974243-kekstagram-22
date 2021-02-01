@@ -8,12 +8,14 @@ const getRandomNumber = (a = 0, b = 0) => {
   // const min = Math.ceil((a < b) ? a : b);
   // const max = Math.floor((a >= b) ? a : b);
 
-  if (min < 0 || max < 0) return alert('Введите корректный диапазон');
+  if (min < 0) {
+    return NaN;
+  }
 
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-getRandomNumber(201, 20); // for ESLint Validation
+getRandomNumber(2, 20); // for ESLint Validation
 
 //Check Max String Length
 
