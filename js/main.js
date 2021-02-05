@@ -37,8 +37,11 @@ const tempMessage = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
+const createNewArray = (arrLength, element, shift) => {
+  return new Array(arrLength).fill('').map((item, index) => element(index + shift));
+};
 
-const createComment = (i) => {
+const createComment = (index) => {
   const commentMessageLength = getRandomNumber(1, 2);
 
   const createCommentMessage = (length) => {
@@ -50,7 +53,7 @@ const createComment = (i) => {
   };
 
   return {
-    id: i + getRandomNumber(1, 300),
+    id: index + getRandomNumber(1, 300),
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: createCommentMessage(commentMessageLength),
     name: tempNames[getRandomNumber(0, tempNames.length - 1)],
@@ -59,9 +62,8 @@ const createComment = (i) => {
 
 const createPhotoDescr = (index) => {
   const arrayOfCommentsLength = getRandomNumber(1, MAX_COMMENTS_COUNT);
-  const createArrayOfComments = new Array(arrayOfCommentsLength).fill('').map((item, i) => createComment(i));
+  const createArrayOfComments = createNewArray(arrayOfCommentsLength, createComment, 0);
 
-  index++;
   return {
     id: index,
     url: `photos/${index}.jpg`,
@@ -71,7 +73,7 @@ const createPhotoDescr = (index) => {
   };
 };
 
-const arrayOfPhotoDescr = new Array(ARRAY_LENGTH).fill('').map((item, index) => createPhotoDescr(index));
+const arrayOfPhotoDescr = createNewArray(ARRAY_LENGTH, createPhotoDescr, 1);
 
 arrayOfPhotoDescr; // for ESLint Validation
 
