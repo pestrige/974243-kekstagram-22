@@ -43,7 +43,7 @@ const createPhotoDescr = (index) => {
 
   return {
     id: index,
-    url: `photos/${index}.jpg`,
+    url: `./photos/${index}.jpg`,
     description: 'Еще одна фотография',
     likes: getRandomNumber(15, 200),
     comments: createArrayOfComments,
@@ -52,4 +52,4 @@ const createPhotoDescr = (index) => {
 
 const photosDescr = createNewArray(ARRAY_LENGTH, createPhotoDescr, 1);
 
-export {photosDescr};
+export { photosDescr };
