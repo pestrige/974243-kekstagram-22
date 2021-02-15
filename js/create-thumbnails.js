@@ -12,7 +12,6 @@ thumbnails.forEach(({url, comments, likes}) => {
   const thumbnailComments = thumbnail.querySelector('.picture__comments');
   const thumbnailLikes = thumbnail.querySelector('.picture__likes');
 
-  thumbnail.href = url;
   thumbnailPhoto.src = url;
   thumbnailComments.textContent = comments.length;
   thumbnailLikes.textContent = likes;
