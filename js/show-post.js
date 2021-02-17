@@ -16,41 +16,34 @@ const thumbnailsList = document.querySelectorAll('.picture');
 
 // Создаем комментарий
 const createComment = (avatar, message, name) => {
-  const comment = document.createElement('li');
-  const commentText = document.createElement('p');
-  const commentAvatar = document.createElement('img');
-
-  comment.classList.add('social__comment');
-  commentAvatar.classList.add('social__picture');
-  commentText.classList.add('social__text');
-  commentAvatar.src = avatar;
-  commentAvatar.alt = name;
-  commentText.textContent = message;
-
-  comment.appendChild(commentAvatar);
-  comment.appendChild(commentText);
-
-  return comment;
+  return `
+    <li class="social__comment">
+      <img
+        class="social__picture"
+        src="${avatar}"
+        alt="${name}"
+        width="35" height="35">
+      <p class="social__text">${message}</p>
+    </li>
+  `;
 };
 
 // Заполняем пост сгенерированными данными
 const insertPostData = (index) => {
   const {url, likes, description, comments} = thumbnails[index];
-  const commentsFragment = document.createDocumentFragment();
 
   postImg.src = url;
   postLikes.textContent = likes;
   postCommentsCount.textContent = comments.length;
   postCaption.textContent = description;
 
+  postComments.innerHTML = '';
+
   // Вставляем комментарий
   comments.forEach(({avatar, message, name}) => {
     const comment = createComment(avatar, message, name);
-    commentsFragment.appendChild(comment);
+    postComments.insertAdjacentHTML('beforeend', comment);
   });
-
-  postComments.innerHTML = '';
-  postComments.appendChild(commentsFragment);
 };
 
 // Показываем пост

@@ -1,6 +1,6 @@
 import { photosDescr } from './photos-descr.js';
 import './create-thumbnails.js';
-import './show-picture.js'
+import './show-post.js'
 
 photosDescr; // for ESLint validation
 
