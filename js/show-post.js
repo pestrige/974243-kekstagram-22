@@ -1,4 +1,5 @@
 import { thumbnails } from './create-thumbnails.js';
+import { isEscEvent } from './util.js';
 
 const post = document.querySelector('.big-picture');
 const postImg = post.querySelector('.big-picture__img img');
@@ -46,6 +47,14 @@ const insertPostData = (index) => {
   });
 };
 
+// Закрыть пост по Esc
+const onPostEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closePost(evt);
+  }
+};
+
 // Показываем пост
 const showPost = (evt) => {
   evt.preventDefault();
@@ -53,6 +62,9 @@ const showPost = (evt) => {
   document.body.classList.add('modal-open');
   socialCommentCount.classList.add('hidden'); //remove in future
   commentsLoader.classList.add('hidden'); //remove in future
+
+  closeButton.addEventListener('click', closePost);
+  document.addEventListener('keydown', onPostEscKeydown);
 };
 
 // Скрываем пост
@@ -62,6 +74,9 @@ const closePost = (evt) => {
   document.body.classList.remove('modal-open');
   socialCommentCount.classList.remove('hidden'); //remove in future
   commentsLoader.classList.remove('hidden'); //remove in future
+
+  closeButton.removeEventListener('click', closePost);
+  document.removeEventListener('keydown', onPostEscKeydown);
 };
 
 // Подписываемся на клик по каждой превьюшке картинки,
@@ -70,7 +85,5 @@ thumbnailsList.forEach((item, i) => {
   item.addEventListener('click', (evt) => {
     insertPostData(i);
     showPost(evt);
-
-    closeButton.addEventListener('click', (evt) => closePost(evt));
   });
 });

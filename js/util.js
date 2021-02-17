@@ -1,5 +1,4 @@
 //  *** Generate Random Number
-
 const getRandomNumber = (a = 0, b = 0) => {
   const min = Math.ceil(Math.min(a, b));
   const max = Math.floor(Math.max(a, b));
@@ -16,7 +15,9 @@ const getRandomNumber = (a = 0, b = 0) => {
 };
 
 // *** Check Max String Length
-
 const checkMaxLength = (value = '', maxLength = 140) => value.length <= maxLength;
 
-export { getRandomNumber, checkMaxLength };
+// *** Check Esc Keydown
+const isEscEvent = (evt) => evt.key == ('Escape' || 'Esc');
+
+export { getRandomNumber, checkMaxLength, isEscEvent };
