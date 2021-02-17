@@ -20,3 +20,4 @@ thumbnails.forEach(({url, comments, likes}) => {
 
 pictiresContainer.appendChild(thumbnailsContainer);
 
+export { thumbnails };
