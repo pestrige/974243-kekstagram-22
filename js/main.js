@@ -1,7 +1,4 @@
-import { photosDescr } from './photos-descr.js';
+//import { photosDescr } from './photos-descr.js'; needs for first lesson only
 import './create-thumbnails.js';
-import './show-post.js'
-
-photosDescr; // for ESLint validation
-
-//console.log(photosDescr);
+import './show-post.js';
+import './upload-img.js';

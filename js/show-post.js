@@ -83,14 +83,12 @@ const closePost = (evt) => {
 // Подписываемся на клик по каждой превьюшке картинки через делегирование
 thumbnailsList.addEventListener('click', (evt) => {
   const thumbnail = evt.target.closest('a.picture');
-  const thumbnailId = thumbnail.dataset.id;
 
-  if (!thumbnail) {
-    return;
-  }
-  
-  insertPostData(thumbnailId);
-  showPost(evt);
+  if (thumbnail) {
+    const thumbnailId = thumbnail.dataset.id;
+    insertPostData(thumbnailId);
+    showPost(evt);
+  } else return;
 });
 
 
