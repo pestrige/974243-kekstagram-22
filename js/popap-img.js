@@ -9,7 +9,7 @@ const closePopup = imgEditPopup.querySelector('#upload-cancel');
 // Элементы для масштабирования
 const smallerBtn = imgEditPopup.querySelector('.scale__control--smaller');
 const biggerBtn = imgEditPopup.querySelector('.scale__control--bigger');
-const scaleInput = document.querySelector('.scale__control--value');
+const scaleInput = imgEditPopup.querySelector('.scale__control--value');
 //Элементы для фильтров
 const previewImg = imgEditPopup.querySelector('.img-upload__preview img');
 const previewFilters = imgEditPopup.querySelector('.effects__list');

@@ -1,5 +1,5 @@
 import {effectSlider, updateSlider } from './slider.js';
-import { previewImg, effectValueInput } from './upload-img.js';
+import { previewImg, effectValueInput } from './popap-img.js';
 
 //const effectValueInput = document.querySelector('.effect-level__value');
 
