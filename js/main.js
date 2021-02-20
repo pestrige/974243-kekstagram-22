@@ -3,3 +3,5 @@ import './create-thumbnails.js';
 import './show-post.js';
 import './upload-img.js';
 import './scale-img.js';
+import './preview-filters.js';
+import './slider.js';
