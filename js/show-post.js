@@ -12,8 +12,8 @@ const closeButton = post.querySelector('.cancel');
 const socialCommentCount = post.querySelector('.social__comment-count'); //remove in future
 const commentsLoader = post.querySelector('.comments-loader'); //remove in future
 
-// Список всех превью картинок
-const thumbnailsList = document.querySelectorAll('.picture');
+// Список превью картинок
+const thumbnailsList = document.querySelector('.pictures');
 
 // Создаем комментарий
 const createComment = (avatar, message, name) => {
@@ -30,7 +30,8 @@ const createComment = (avatar, message, name) => {
 };
 
 // Заполняем пост сгенерированными данными
-const insertPostData = (index) => {
+const insertPostData = (id) => {
+  const index = id - 1;
   const {url, likes, description, comments} = thumbnails[index];
 
   postImg.src = url;
@@ -79,11 +80,15 @@ const closePost = (evt) => {
   document.removeEventListener('keydown', onPostEscKeydown);
 };
 
-// Подписываемся на клик по каждой превьюшке картинки,
-// где i будет соответствовать индексу превью и индексу в массиве данных
-thumbnailsList.forEach((item, i) => {
-  item.addEventListener('click', (evt) => {
-    insertPostData(i);
+// Подписываемся на клик по каждой превьюшке картинки через делегирование
+thumbnailsList.addEventListener('click', (evt) => {
+  const thumbnail = evt.target.closest('a.picture');
+
+  if (thumbnail) {
+    const thumbnailId = thumbnail.dataset.id;
+    insertPostData(thumbnailId);
     showPost(evt);
-  });
+  } else return;
 });
+
+

@@ -6,12 +6,13 @@ const pictiresContainer = document.querySelector('.pictures');
 const thumbnails = photosDescr;
 const thumbnailsContainer = document.createDocumentFragment();
 
-thumbnails.forEach(({url, comments, likes}) => {
+thumbnails.forEach(({id, url, comments, likes}) => {
   const thumbnail = templatePicture.cloneNode(true);
   const thumbnailPhoto = thumbnail.querySelector('.picture__img');
   const thumbnailComments = thumbnail.querySelector('.picture__comments');
   const thumbnailLikes = thumbnail.querySelector('.picture__likes');
 
+  thumbnail.dataset.id = id;
   thumbnailPhoto.src = url;
   thumbnailComments.textContent = comments.length;
   thumbnailLikes.textContent = likes;
