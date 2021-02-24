@@ -53,24 +53,22 @@ const onFilterClick = (evt) => {
   if (evt.target.classList.contains('effects__radio')) {
     const filterName = evt.target.id;
 
-    // Применяем конкретный фильтр на картинку
-    effects.forEach(({name, effect, min, max, step}) => {
-      if (name === filterName) {
-        effectSlider.removeAttribute('disabled');
-        previewImg.style.filter = effect(max);
-        updateSlider(min, max, step);
+    // Находим нужный фильтр
+    const {name, effect, min, max, step} = effects.find(effect => effect.name === filterName);
 
-        // Подписываемся на изменение ползунка слайдера
-        // и записываем значение в фильтр
-        effectSlider.noUiSlider.on('update', (values, handle) => {
-          effectValueInput.setAttribute('value', values[handle]);
-          previewImg.style.filter = effect(effectValueInput.value);
-        });
-      }
-      if (name === 'effect-none') {
-        effectSlider.setAttribute('disabled', true);
-      }
+    // Применяем фильтр на картинку
+    previewImg.style.filter = effect(max);
+    updateSlider(min, max, step);
+
+    // Подписываемся на изменение ползунка слайдера
+    // и записываем значение в фильтр
+    effectSlider.noUiSlider.on('update', (values, handle) => {
+      effectValueInput.setAttribute('value', values[handle]);
+      previewImg.style.filter = effect(effectValueInput.value);
     });
+
+    // Отключаем ползунок на картинке без фильтра
+    (name === 'effect-none') ? effectSlider.setAttribute('disabled', true) : effectSlider.removeAttribute('disabled');
   }
 };
 
