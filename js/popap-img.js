@@ -1,6 +1,8 @@
 import { isEscEvent } from './util.js';
+import { showImg } from './show-img.js';
 import { onScaleBtnClick, restorePreviewImgScale } from './scale-img.js';
 import { onFilterClick } from './preview-filters.js';
+import { onFieldsInput, onFieldsFocus } from './comments-tags.js';
 
 // Элементы загрузки и попапа
 const uploadFileInput = document.querySelector('#upload-file');
@@ -14,6 +16,8 @@ const scaleInput = imgEditPopup.querySelector('.scale__control--value');
 const previewImg = imgEditPopup.querySelector('.img-upload__preview img');
 const previewFilters = imgEditPopup.querySelector('.effects__list');
 const effectValueInput = imgEditPopup.querySelector('.effect-level__value');
+//Элементы комментария и хештегов
+const fieldSet = imgEditPopup.querySelector('.img-upload__text');
 
 const onImgEditPopupKeydown = (evt) => {
   if (isEscEvent(evt)) {
@@ -23,9 +27,10 @@ const onImgEditPopupKeydown = (evt) => {
 };
 
 // Действия по открытию попапа
-const showImgEditPopup = () => {
+const showImgEditPopup = (evt) => {
   imgEditPopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  showImg(evt);
   closePopup.addEventListener('click', hideImgEditPopup);
   document.addEventListener('keydown', onImgEditPopupKeydown);
 
@@ -33,6 +38,9 @@ const showImgEditPopup = () => {
   biggerBtn.addEventListener('click', onScaleBtnClick);
 
   previewFilters.addEventListener('click', onFilterClick);
+
+  fieldSet.addEventListener('input', onFieldsInput);
+  fieldSet.addEventListener('focusin', onFieldsFocus);
 };
 
 // Действия по закрытию попапа
@@ -48,11 +56,14 @@ const hideImgEditPopup = () => {
   restorePreviewImgScale();
 
   previewFilters.removeEventListener('click', onFilterClick);
+
+  fieldSet.removeEventListener('input', onFieldsInput);
+  fieldSet.removeEventListener('focusin', onFieldsFocus);
 };
 
 // Событие для открытия попапа
-uploadFileInput.addEventListener('change', () => {
-  showImgEditPopup();
+uploadFileInput.addEventListener('change', (evt) => {
+  showImgEditPopup(evt);
 });
 
 //showImgEditPopup(); //for test only
