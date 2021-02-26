@@ -64,6 +64,6 @@ uploadFileInput.addEventListener('change', () => {
   showImgEditPopup();
 });
 
-showImgEditPopup(); //for test only
+//showImgEditPopup(); //for test only
 
 export { previewImg, scaleInput, effectValueInput };

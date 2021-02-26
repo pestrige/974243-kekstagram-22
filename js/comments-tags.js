@@ -1,7 +1,9 @@
 import { isEscEvent } from './util.js';
 
 const MAX_COMMENT_LENGTH = 140;
-const VALID_SYMBOLS = /^#[a-z0-9а-я]+$/i; // только буквы и цифры, начиная с #
+const MAX_HASHTAG_LENGTH = 20;
+const MAX_HASHTAGS = 5;
+const VALID_SYMBOLS = /^#[a-z0-9а-я]+$/i; // только буквы и цифры без учета регистра, начиная с #
 
 const isValidSymbols = (item) => {
   return item !== '' && !(item.match(VALID_SYMBOLS));
@@ -36,9 +38,9 @@ const onFieldsInput = (evt) => {
     hashtags.forEach((item, i, array) => {
       if (array.length > 1 && array[i - 1] === '') {
         field.setCustomValidity('Удалите пробелы')
-      } else if (array.length > 5) {
+      } else if (array.length > MAX_HASHTAGS) {
         field.setCustomValidity('Максимум 5 хештегов')
-      } else if (item.length > 20) {
+      } else if (item.length > MAX_HASHTAG_LENGTH) {
         field.setCustomValidity(`Хештег должен быть короче 20 символов, удалите ${item.length - 20} симв.`)
       } else if (isDublicate(array)) {
         field.setCustomValidity('Такой хештег уже есть')
