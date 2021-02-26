@@ -3,7 +3,7 @@ import { isEscEvent } from './util.js';
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAGS = 5;
-const VALID_SYMBOLS = /^#[a-z0-9а-я]+$/i; // только буквы и цифры без учета регистра, начиная с #
+const VALID_SYMBOLS = /^#[a-z0-9а-яё]+$/i; // только буквы и цифры без учета регистра, начиная с #
 
 const isValidSymbols = (item) => {
   return item !== '' && !(item.match(VALID_SYMBOLS));
@@ -33,7 +33,10 @@ const onFieldsInput = (evt) => {
 
   // Валидация хештегов
   if (isHashtags) {
-    const hashtags = field.value.toLowerCase().split(' ');
+    const hashtags = field.value
+      .toLowerCase()
+      .trim()
+      .split(' ');
 
     hashtags.forEach((item, i, array) => {
       if (array.length > 1 && array[i - 1] === '') {
