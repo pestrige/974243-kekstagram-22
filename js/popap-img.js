@@ -1,4 +1,5 @@
 import { isEscEvent } from './util.js';
+import { showImg } from './show-img.js';
 import { onScaleBtnClick, restorePreviewImgScale } from './scale-img.js';
 import { onFilterClick } from './preview-filters.js';
 import { onFieldsInput, onFieldsFocus } from './comments-tags.js';
@@ -26,9 +27,10 @@ const onImgEditPopupKeydown = (evt) => {
 };
 
 // Действия по открытию попапа
-const showImgEditPopup = () => {
+const showImgEditPopup = (evt) => {
   imgEditPopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  showImg(evt);
   closePopup.addEventListener('click', hideImgEditPopup);
   document.addEventListener('keydown', onImgEditPopupKeydown);
 
@@ -60,8 +62,8 @@ const hideImgEditPopup = () => {
 };
 
 // Событие для открытия попапа
-uploadFileInput.addEventListener('change', () => {
-  showImgEditPopup();
+uploadFileInput.addEventListener('change', (evt) => {
+  showImgEditPopup(evt);
 });
 
 //showImgEditPopup(); //for test only
