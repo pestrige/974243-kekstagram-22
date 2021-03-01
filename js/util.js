@@ -1,4 +1,8 @@
-//  *** Generate Random Number
+const ALERT_SHOW_TIME = 5000;
+const mainPage = document.querySelector('main');
+
+// Генерируем рандомное число
+
 const getRandomNumber = (a = 0, b = 0) => {
   const min = Math.ceil(Math.min(a, b));
   const max = Math.floor(Math.max(a, b));
@@ -14,10 +18,64 @@ const getRandomNumber = (a = 0, b = 0) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-// *** Check Max String Length
+// Проверяем длину строки
+
 const checkMaxLength = (value = '', maxLength = 140) => value.length <= maxLength;
 
-// *** Check Esc Keydown
-const isEscEvent = (evt) => evt.key == ('Escape' || 'Esc');
+// Проверяем нажата ли Esc
 
-export { getRandomNumber, checkMaxLength, isEscEvent };
+const isEscEvent = (evt) => evt.key === ('Escape' || 'Esc');
+
+// Показываем сообщение об ошибке
+
+const showAlert = (err) => {
+  const alertContainer = document.createElement('div');
+
+  alertContainer.style.zIndex = 100;
+  alertContainer.style.position = 'absolute';
+  alertContainer.style.left = 0;
+  alertContainer.style.top = '50%';
+  alertContainer.style.right = 0;
+  alertContainer.style.padding = '20px 3px';
+  alertContainer.style.fontSize = '2em';
+  alertContainer.style.textAlign = 'center';
+  alertContainer.style.backgroundColor = 'crimson';
+  alertContainer.textContent = `Ошибка: ${err}. Попробуйте позднее`;
+
+  document.body.append(alertContainer);
+
+  setTimeout(() => {
+    alertContainer.remove();
+  }, ALERT_SHOW_TIME);
+};
+
+// Показываем сообщение о загрузке изображения
+
+const showMessage = (typeMessage) => {
+  const container = document
+    .querySelector(`#${typeMessage}`).content
+    .querySelector(`.${typeMessage}`).cloneNode(true);
+
+  const closeMessage = (evt) => {
+    const closeBtn = container.querySelector('button');
+
+    if (evt.target === container || evt.target === closeBtn) {
+      evt.preventDefault();
+      container.remove();
+    }
+  };
+
+  const onMessageKeydown = (evt) => {
+    if (isEscEvent(evt)) {
+      evt.preventDefault();
+      container.remove();
+      document.removeEventListener('keydown', onMessageKeydown);
+    }
+  };
+
+  mainPage.append(container);
+  container.addEventListener('click', closeMessage);
+  document.addEventListener('keydown', onMessageKeydown);
+};
+
+export { getRandomNumber, checkMaxLength, isEscEvent, showAlert, showMessage };

@@ -36,6 +36,9 @@ const changePreviewImgScale = (inputValue) => {
 };
 
 //Сбрасываем стили масштаба
-const restorePreviewImgScale = () => previewImg.removeAttribute('style');
+const restorePreviewImgScale = () => {
+  previewImg.removeAttribute('style');
+  scaleInput.value = '100%';
+};
 
 export { onScaleBtnClick, restorePreviewImgScale };

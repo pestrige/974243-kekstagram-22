@@ -1,4 +1,3 @@
-import { thumbnails } from './create-thumbnails.js';
 import { isEscEvent } from './util.js';
 
 const post = document.querySelector('.big-picture');
@@ -29,11 +28,11 @@ const createComment = (avatar, message, name) => {
   `;
 };
 
-// Заполняем пост сгенерированными данными
-const insertPostData = (id) => {
-  const index = id - 1;
-  const {url, likes, description, comments} = thumbnails[index];
+// Заполняем пост полученными с сервера данными
+const insertPostData = (id, thumbnails) => {
+  const {url, likes, description, comments} = thumbnails[id];
 
+  // Присваиваем значения из массива элементам поста
   postImg.src = url;
   postLikes.textContent = likes;
   postCommentsCount.textContent = comments.length;
@@ -80,15 +79,19 @@ const closePost = (evt) => {
   document.removeEventListener('keydown', onPostEscKeydown);
 };
 
-// Подписываемся на клик по каждой превьюшке картинки через делегирование
-thumbnailsList.addEventListener('click', (evt) => {
-  const thumbnail = evt.target.closest('a.picture');
+// Обертка, чтобы получить массив данных с сервера
+const showPostPreview = (dataArrayFromServer) => {
 
-  if (thumbnail) {
-    const thumbnailId = thumbnail.dataset.id;
-    insertPostData(thumbnailId);
-    showPost(evt);
-  } else return;
-});
+  // Подписываемся на клик по каждой превьюшке картинки через делегирование
+  thumbnailsList.addEventListener('click', (evt) => {
+    const thumbnail = evt.target.closest('a.picture');
 
+    if (thumbnail) {
+      const thumbnailId = thumbnail.dataset.id;
+      insertPostData(thumbnailId, dataArrayFromServer);
+      showPost(evt);
+    } else return false;
+  });
+};
 
+export { showPostPreview };
