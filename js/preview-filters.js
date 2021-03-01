@@ -1,5 +1,5 @@
 import {effectSlider, updateSlider } from './slider.js';
-import { previewImg, effectValueInput } from './popap-img.js';
+import { previewImg, effectValueInput } from './popup-img.js';
 
 const previewFilters = document.querySelector('.effects__list');
 const defaultFilterRadio = previewFilters.querySelector('#effect-none');

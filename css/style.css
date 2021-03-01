@@ -1205,6 +1205,20 @@ main {
  * Экраны ошибки и успеха загрузки изображения
  */
 
+.alert-message {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 35%;
+  z-index: 100;
+  padding: 20px 5px;
+
+  font-size: 2em;
+  text-align: center;
+  background-color: crimson;
+}
+
 .error,
 .success {
   position: fixed;

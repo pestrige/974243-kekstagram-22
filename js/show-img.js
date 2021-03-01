@@ -1,4 +1,4 @@
-import { previewImg } from './popap-img.js';
+import { previewImg } from './popup-img.js';
 
 // Показываем превью загруженной пользователем фотографии
 const showImg = (evt) => {
