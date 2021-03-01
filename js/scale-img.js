@@ -1,4 +1,4 @@
-import { previewImg, scaleInput } from './popap-img.js';
+import { previewImg, scaleInput } from './popup-img.js';
 
 //const scaleInput = document.querySelector('.scale__control--value');
 //const previewImg = document.querySelector('.img-upload__preview img');
@@ -36,6 +36,9 @@ const changePreviewImgScale = (inputValue) => {
 };
 
 //Сбрасываем стили масштаба
-const restorePreviewImgScale = () => previewImg.removeAttribute('style');
+const restorePreviewImgScale = () => {
+  previewImg.removeAttribute('style');
+  scaleInput.value = '100%';
+};
 
 export { onScaleBtnClick, restorePreviewImgScale };

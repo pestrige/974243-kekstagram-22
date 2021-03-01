@@ -1,8 +1,9 @@
 import { isEscEvent } from './util.js';
 import { showImg } from './show-img.js';
 import { onScaleBtnClick, restorePreviewImgScale } from './scale-img.js';
-import { onFilterClick } from './preview-filters.js';
-import { onFieldsInput, onFieldsFocus } from './comments-tags.js';
+import { onFilterClick, restoreFilters } from './preview-filters.js';
+import { updateSlider } from './slider.js';
+import { onFieldsInput, onFieldsFocus } from './post-form.js';
 
 // Элементы загрузки и попапа
 const uploadFileInput = document.querySelector('#upload-file');
@@ -18,12 +19,25 @@ const previewFilters = imgEditPopup.querySelector('.effects__list');
 const effectValueInput = imgEditPopup.querySelector('.effect-level__value');
 //Элементы комментария и хештегов
 const fieldSet = imgEditPopup.querySelector('.img-upload__text');
+const hashtagsField = fieldSet.querySelector('.text__hashtags');
+const commentsField = fieldSet.querySelector('.text__description');
 
 const onImgEditPopupKeydown = (evt) => {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     hideImgEditPopup(evt);
   }
+};
+
+//Сброс значений до дефолтных
+const restoreDefaults = () => {
+  uploadFileInput.value = '';
+  hashtagsField.value = '';
+  commentsField.value = '';
+
+  restorePreviewImgScale();
+  updateSlider();
+  restoreFilters();
 };
 
 // Действия по открытию попапа
@@ -45,7 +59,7 @@ const showImgEditPopup = (evt) => {
 
 // Действия по закрытию попапа
 const hideImgEditPopup = () => {
-  uploadFileInput.value = '';
+  restoreDefaults();
   imgEditPopup.classList.add('hidden');
   document.body.classList.remove('modal-open');
   closePopup.removeEventListener('click', hideImgEditPopup);
@@ -53,7 +67,6 @@ const hideImgEditPopup = () => {
 
   smallerBtn.removeEventListener('click', onScaleBtnClick);
   biggerBtn.removeEventListener('click', onScaleBtnClick);
-  restorePreviewImgScale();
 
   previewFilters.removeEventListener('click', onFilterClick);
 
@@ -68,4 +81,4 @@ uploadFileInput.addEventListener('change', (evt) => {
 
 //showImgEditPopup(); //for test only
 
-export { previewImg, scaleInput, effectValueInput };
+export { previewImg, scaleInput, effectValueInput, hideImgEditPopup };

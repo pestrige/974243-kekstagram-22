@@ -1,7 +1,8 @@
 import {effectSlider, updateSlider } from './slider.js';
-import { previewImg, effectValueInput } from './popap-img.js';
+import { previewImg, effectValueInput } from './popup-img.js';
 
-//const effectValueInput = document.querySelector('.effect-level__value');
+const previewFilters = document.querySelector('.effects__list');
+const defaultFilterRadio = previewFilters.querySelector('#effect-none');
 
 const effects = [
   {
@@ -72,5 +73,12 @@ const onFilterClick = (evt) => {
   }
 };
 
-export { onFilterClick };
+// Удаляем фильтры
+const restoreFilters = () => {
+  defaultFilterRadio.checked = true;
+  effectSlider.setAttribute('disabled', true);
+  previewImg.style.filter = 'none';
+};
+
+export { onFilterClick, restoreFilters };
 

@@ -1,6 +1,6 @@
 const effectSlider = document.querySelector('.effect-level__slider');
 
-const updateSlider = (min, max, step) => {
+const updateSlider = (min = 1, max = 100, step = 1) => {
   effectSlider.noUiSlider.updateOptions({
     range: {
       min: min,

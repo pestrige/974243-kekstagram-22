@@ -1,9 +1,12 @@
 import { isEscEvent } from './util.js';
+import { sendData } from './data.js';
 
 const MAX_COMMENT_LENGTH = 140;
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_HASHTAGS = 5;
 const VALID_SYMBOLS = /^#[a-z0-9а-яё]+$/i; // только буквы и цифры без учета регистра, начиная с #
+
+const postForm = document.querySelector('.img-upload__form');
 
 const isValidSymbols = (item) => {
   return item !== '' && !(item.match(VALID_SYMBOLS));
@@ -71,4 +74,17 @@ const onFieldsFocus = (evt) => {
   });
 };
 
-export { onFieldsInput, onFieldsFocus };
+// Отправка формы
+const setPostForm = (onSuccess, onFail) => {
+  postForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => onFail(),
+      new FormData(evt.target),
+    );
+  });
+};
+
+export { onFieldsInput, onFieldsFocus, setPostForm };
