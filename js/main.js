@@ -1,3 +1,4 @@
+/* global _:readonly */
 import { getData } from './data.js';
 import { renderThumbnails } from './render-thumbnails.js';
 import { showPostPreview } from './show-post.js';
@@ -9,11 +10,13 @@ import './scale-img.js';
 import './preview-filters.js';
 import './slider.js';
 
+const RENDER_DELAY = 500;
+
 getData((data) => {
   renderThumbnails(data);
   showPostPreview(data);
   showFilterContainer();
-  setFilterClick(data, renderThumbnails);
+  setFilterClick(data, _.debounce(renderThumbnails, RENDER_DELAY));
 });
 
 setPostForm(
