@@ -2,8 +2,14 @@ const templatePicture = document.querySelector('#picture').content.querySelector
 const pictiresContainer = document.querySelector('.pictures');
 const thumbnailsContainer = document.createDocumentFragment();
 
+// Удаляем все превью постов
+const clearThumbnailsList = () => {
+  const thumbnailsList = pictiresContainer.querySelectorAll('.picture');
+  thumbnailsList.forEach(item => item.remove());
+}
+
 // Обертка для получения данных с сервера
-const thumbnails = (data) => {
+const renderThumbnails = (data) => {
 
   // На основе полученного массива data создаем превьюшки постов
   data.forEach(({id, url, comments, likes}) => {
@@ -19,7 +25,8 @@ const thumbnails = (data) => {
     thumbnailsContainer.appendChild(thumbnail);
   });
 
+  clearThumbnailsList();
   pictiresContainer.appendChild(thumbnailsContainer);
 };
 
-export { thumbnails };
+export { renderThumbnails };

@@ -1,7 +1,7 @@
 import { showAlert } from './util.js';
 
 // Получаем массив данных с сервера
-const getData = (...onSuccess) => {
+const getData = (onSuccess) => {
   return fetch('https://22.javascript.pages.academy/kekstagram/data')
     .then(response => {
       if (response.ok) {
@@ -11,9 +11,7 @@ const getData = (...onSuccess) => {
         throw new Error(`${response.status} ${response.statusText}`);
       }
     })
-    .then(data => {
-      onSuccess.forEach(action => action(data));
-    })
+    .then(data => onSuccess(data))
     .catch((err) => {
       showAlert(err);
     })

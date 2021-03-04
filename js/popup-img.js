@@ -1,9 +1,11 @@
-import { isEscEvent } from './util.js';
+import { isEscEvent, debounce } from './util.js';
 import { showImg } from './show-img.js';
 import { onScaleBtnClick, restorePreviewImgScale } from './scale-img.js';
 import { onFilterClick, restoreFilters } from './preview-filters.js';
 import { updateSlider } from './slider.js';
 import { onFieldsInput, onFieldsFocus } from './post-form.js';
+
+const CHECK_DELAY = 500;
 
 // Элементы загрузки и попапа
 const uploadFileInput = document.querySelector('#upload-file');
@@ -29,6 +31,9 @@ const onImgEditPopupKeydown = (evt) => {
   }
 };
 
+// Задержка на проверку набранных символов
+const onFieldsInputDebounced = debounce(onFieldsInput, CHECK_DELAY);
+
 //Сброс значений до дефолтных
 const restoreDefaults = () => {
   uploadFileInput.value = '';
@@ -53,7 +58,7 @@ const showImgEditPopup = (evt) => {
 
   previewFilters.addEventListener('click', onFilterClick);
 
-  fieldSet.addEventListener('input', onFieldsInput);
+  fieldSet.addEventListener('input', onFieldsInputDebounced);
   fieldSet.addEventListener('focusin', onFieldsFocus);
 };
 
@@ -70,7 +75,7 @@ const hideImgEditPopup = () => {
 
   previewFilters.removeEventListener('click', onFilterClick);
 
-  fieldSet.removeEventListener('input', onFieldsInput);
+  fieldSet.removeEventListener('input', onFieldsInputDebounced);
   fieldSet.removeEventListener('focusin', onFieldsFocus);
 };
 
