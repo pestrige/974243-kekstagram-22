@@ -70,4 +70,16 @@ const showMessage = (typeMessage) => {
   document.addEventListener('keydown', onMessageKeydown);
 };
 
-export { getRandomNumber, checkMaxLength, isEscEvent, showAlert, showMessage };
+// свой Debounce
+
+const debounce = (fn, ms) => {
+  let timeout;
+
+  return function () {
+    const callFn = () => fn.apply(this, arguments);
+    clearTimeout(timeout);
+    timeout = setTimeout(callFn, ms);
+  };
+};
+
+export { getRandomNumber, checkMaxLength, isEscEvent, showAlert, showMessage, debounce };

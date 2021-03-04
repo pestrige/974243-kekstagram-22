@@ -22,9 +22,9 @@ const randomFilter = (array) => {
   const resultedArray = [];
   while (resultedArray.length < RANDOM_POSTS_COUNT) {
     const randomItem = array[getRandomNumber(0, array.length - 1)];
-    const isDublicate = () => resultedArray.some(item => item === randomItem)
+    const isDublicate = resultedArray.includes(randomItem);
 
-    if (!isDublicate()) {
+    if (!isDublicate) {
       resultedArray.push(randomItem);
     }
   }
@@ -58,4 +58,5 @@ const setFilterClick = (arrayFromServer, callback) => {
     }
   })
 }
+
 export { showFilterContainer, setFilterClick };
