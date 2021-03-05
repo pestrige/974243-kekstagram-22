@@ -1,3 +1,5 @@
+import { stringToHtml } from './util.js';
+
 const MAX_SHOWN_COMMENTS = 5;
 
 const post = document.querySelector('.big-picture');
@@ -16,15 +18,26 @@ let tempComments = null;
 
 // Создаем комментарий
 const createComment = (avatar, message, name) => {
-  const comment = document.createElement('li');
-  comment.classList.add('social__comment');
-  comment.insertAdjacentHTML('beforeend', `
-    <img
-      class="social__picture"
-      src="${avatar}"
-      alt="${name}"
-      width="35" height="35">
-    <p class="social__text">${message}</p>`);
+  // const comment = document.createElement('li');
+  // comment.classList.add('social__comment');
+  // comment.insertAdjacentHTML('beforeend', `
+  //   <img
+  //     class="social__picture"
+  //     src="${avatar}"
+  //     alt="${name}"
+  //     width="35" height="35">
+  //   <p class="social__text">${message}</p>`);
+  // return comment;
+  const commentStructure = `
+    <li class="social__comment">
+      <img
+        class="social__picture"
+        src="${avatar}"
+        alt="${name}"
+        width="35" height="35">
+      <p class="social__text">${message}</p>
+    </li>`;
+  const comment = stringToHtml(commentStructure);
   return comment;
 };
 
@@ -35,8 +48,10 @@ const onCommentsLoaderClick = () => {
 
 // Показываем больше комментариев
 const showMoreComments = (tempCommentsArray, count) => {
-  count > tempCommentsArray.length ? count = tempCommentsArray.length : count;
-
+  // Проверяем, чтобы итераций было не больше длины массива
+  if (count > tempCommentsArray.length) {
+    count = tempCommentsArray.length;
+  }
   // Рендерим count комментариев
   for (let i = 0; i < count; i++) {
     const {avatar, message, name} = tempCommentsArray[i];
