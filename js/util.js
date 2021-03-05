@@ -82,4 +82,18 @@ const debounce = (fn, ms) => {
   };
 };
 
-export { getRandomNumber, checkMaxLength, isEscEvent, showAlert, showMessage, debounce };
+// Преобразуем строку в один HTML элемент
+
+const stringToHtml = (str) => {
+  const div = document.createElement('div');
+  div.innerHTML = str;
+  let element = div.firstChild;
+
+  while (element.nodeType === 3 && element != null) {
+    element = element.nextSibling;
+  }
+
+  return element;
+};
+
+export { getRandomNumber, checkMaxLength, isEscEvent, showAlert, showMessage, debounce, stringToHtml };
