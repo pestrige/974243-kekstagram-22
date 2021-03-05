@@ -4,7 +4,6 @@ import { renderPost, onCommentsLoaderClick } from './full-post.js';
 const post = document.querySelector('.big-picture');
 const closeButton = post.querySelector('.cancel');
 const commentsLoader = post.querySelector('.comments-loader');
-//const socialCommentCount = post.querySelector('.social__comment-count'); //remove in future
 
 // Список превью картинок
 const thumbnailsList = document.querySelector('.pictures');

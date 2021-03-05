@@ -82,7 +82,7 @@ const debounce = (fn, ms) => {
   };
 };
 
-// Преобразуем строку в HTML элемент
+// Преобразуем строку в один HTML элемент
 
 const stringToHtml = (str) => {
   const div = document.createElement('div');

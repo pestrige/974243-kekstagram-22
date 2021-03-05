@@ -11,23 +11,12 @@ const socialCommentCount = post.querySelector('.social__comment-count');
 const postCommentsCount = post.querySelector('.comments-count');
 const postShownCommentsCount = post.querySelector('.shown-comments-count');
 const commentsLoader = post.querySelector('.comments-loader');
-const commentsTempContainer = document.createDocumentFragment();
 
 let commentsArrayLength = null;
 let tempComments = null;
 
 // Создаем комментарий
 const createComment = (avatar, message, name) => {
-  // const comment = document.createElement('li');
-  // comment.classList.add('social__comment');
-  // comment.insertAdjacentHTML('beforeend', `
-  //   <img
-  //     class="social__picture"
-  //     src="${avatar}"
-  //     alt="${name}"
-  //     width="35" height="35">
-  //   <p class="social__text">${message}</p>`);
-  // return comment;
   const commentStructure = `
     <li class="social__comment">
       <img
@@ -48,20 +37,19 @@ const onCommentsLoaderClick = () => {
 
 // Показываем больше комментариев
 const showMoreComments = (tempCommentsArray, count) => {
+  const commentsTempContainer = document.createDocumentFragment();
+
   // Проверяем, чтобы итераций было не больше длины массива
   if (count > tempCommentsArray.length) {
     count = tempCommentsArray.length;
   }
   // Рендерим count комментариев
   for (let i = 0; i < count; i++) {
-    const {avatar, message, name} = tempCommentsArray[i];
+    const {avatar, message, name} = tempCommentsArray.shift(); // shift возвращает значение удаленного элемента
     const comment = createComment(avatar, message, name);
     commentsTempContainer.appendChild(comment);
   }
   postComments.appendChild(commentsTempContainer);
-
-  // Удаляем отрендеренные комментарии из массива
-  tempCommentsArray.splice(0, count);
 
   // Обновляем счетчик показанных комментариев
   postShownCommentsCount.textContent = commentsArrayLength - tempCommentsArray.length;
@@ -88,7 +76,6 @@ const renderPost = (id, thumbnails) => {
   postCaption.textContent = description;
 
   postComments.innerHTML = '';
-  commentsTempContainer.innerHTML = '';
 
   // Условия рендера комментариев
   if (isLessComments) {
