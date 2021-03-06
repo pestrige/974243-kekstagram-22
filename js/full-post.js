@@ -26,8 +26,7 @@ const createComment = (avatar, message, name) => {
         width="35" height="35">
       <p class="social__text">${message}</p>
     </li>`;
-  const comment = stringToHtml(commentStructure);
-  return comment;
+  return stringToHtml(commentStructure);
 };
 
 // Действия по клику Загрузить еще
