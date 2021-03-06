@@ -1,3 +1,6 @@
+import noUiSlider from 'nouislider';
+import 'nouislider/distribute/nouislider.css';
+
 const effectSlider = document.querySelector('.effect-level__slider');
 
 const updateSlider = (min = 1, max = 100, step = 1) => {
