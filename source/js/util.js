@@ -89,7 +89,7 @@ const stringToHtml = (str) => {
   div.innerHTML = str;
   let element = div.firstChild;
 
-  while (element.nodeType === 3 && element != null) {
+  while (element.nodeType === 3) {
     element = element.nextSibling;
   }
 

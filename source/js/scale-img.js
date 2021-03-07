@@ -1,7 +1,7 @@
 import { previewImg, scaleInput } from './popup-img.js';
 
-//const scaleInput = document.querySelector('.scale__control--value');
-//const previewImg = document.querySelector('.img-upload__preview img');
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
 
 //Масштабируем картинку по кликам на кнопки
 const onScaleBtnClick = (evt) => {
@@ -12,17 +12,17 @@ const onScaleBtnClick = (evt) => {
   let inputValue = Number(scaleInput.value.slice(0, -1)); // Строка в число без процентов
 
   if (isSmallerBtn && inputValue > 0) {
-    inputValue -= 25;
+    inputValue -= MIN_SCALE;
   }
-  if (isBiggerBtn && inputValue < 100) {
-    inputValue += 25;
+  if (isBiggerBtn && inputValue < MAX_SCALE) {
+    inputValue += MIN_SCALE;
   }
 
-  if (inputValue > 100) {
-    inputValue = 100;
+  if (inputValue > MAX_SCALE) {
+    inputValue = MAX_SCALE;
   }
-  if (inputValue < 25) {
-    inputValue = 25;
+  if (inputValue < MIN_SCALE) {
+    inputValue = MIN_SCALE;
   }
 
   changePreviewImgScale(inputValue);

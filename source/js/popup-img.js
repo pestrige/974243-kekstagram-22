@@ -1,7 +1,7 @@
 import { isEscEvent, debounce } from './util.js';
 import { showImg } from './show-img.js';
 import { onScaleBtnClick, restorePreviewImgScale } from './scale-img.js';
-import { onFilterClick, restoreFilters } from './preview-filters.js';
+import { onFilterClick, restoreFilters } from './previews-filters.js';
 import { updateSlider } from './slider.js';
 import { onFieldsInput, onFieldsFocus } from './post-form.js';
 
@@ -30,6 +30,7 @@ const onImgEditPopupKeydown = (evt) => {
     hideImgEditPopup(evt);
   }
 };
+const onClosePopupClick = () => hideImgEditPopup();
 
 // Задержка на проверку набранных символов
 const onFieldsInputDebounced = debounce(onFieldsInput, CHECK_DELAY);
@@ -50,7 +51,7 @@ const showImgEditPopup = (evt) => {
   imgEditPopup.classList.remove('hidden');
   document.body.classList.add('modal-open');
   showImg(evt);
-  closePopup.addEventListener('click', hideImgEditPopup);
+  closePopup.addEventListener('click', onClosePopupClick);
   document.addEventListener('keydown', onImgEditPopupKeydown);
 
   smallerBtn.addEventListener('click', onScaleBtnClick);
@@ -67,7 +68,7 @@ const hideImgEditPopup = () => {
   restoreDefaults();
   imgEditPopup.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  closePopup.removeEventListener('click', hideImgEditPopup);
+  closePopup.removeEventListener('click', onClosePopupClick);
   document.removeEventListener('keydown', onImgEditPopupKeydown);
 
   smallerBtn.removeEventListener('click', onScaleBtnClick);

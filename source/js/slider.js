@@ -1,7 +1,8 @@
 import noUiSlider from 'nouislider';
 import 'nouislider/distribute/nouislider.css';
 
-const effectSlider = document.querySelector('.effect-level__slider');
+const effectSliderContainer = document.querySelector('.effect-level');
+const effectSlider = effectSliderContainer.querySelector('.effect-level__slider');
 
 const updateSlider = (min = 1, max = 100, step = 1) => {
   effectSlider.noUiSlider.updateOptions({
@@ -14,7 +15,6 @@ const updateSlider = (min = 1, max = 100, step = 1) => {
   });
 };
 
-// eslint-disable-next-line no-undef
 noUiSlider.create(effectSlider, {
   start: 100,
   range: {
@@ -36,6 +36,7 @@ noUiSlider.create(effectSlider, {
   },
 });
 
-effectSlider.setAttribute('disabled', true);
+//По умолчанию слайдер скрыт
+effectSliderContainer.classList.add('hidden');
 
 export {effectSlider, updateSlider };

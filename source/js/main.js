@@ -6,7 +6,7 @@ import { hideImgEditPopup } from './popup-img.js';
 import { showMessage, debounce } from './util.js';
 import { showFilterContainer, setFilterClick } from './posts-filters.js';
 import './scale-img.js';
-import './preview-filters.js';
+import './previews-filters.js';
 import './slider.js';
 
 const RENDER_DELAY = 500;

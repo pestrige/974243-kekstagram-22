@@ -1,6 +1,7 @@
 import {effectSlider, updateSlider } from './slider.js';
 import { previewImg, effectValueInput } from './popup-img.js';
 
+const effectSliderContainer = document.querySelector('.effect-level');
 const previewFilters = document.querySelector('.effects__list');
 const defaultFilterRadio = previewFilters.querySelector('#effect-none');
 
@@ -68,15 +69,15 @@ const onFilterClick = (evt) => {
       previewImg.style.filter = effect(effectValueInput.value);
     });
 
-    // Отключаем ползунок на картинке без фильтра
-    (name === 'effect-none') ? effectSlider.setAttribute('disabled', true) : effectSlider.removeAttribute('disabled');
+    // Скрываем ползунок на картинке без фильтра
+    (name === 'effect-none') ? effectSliderContainer.classList.add('hidden') : effectSliderContainer.classList.remove('hidden');
   }
 };
 
 // Удаляем фильтры
 const restoreFilters = () => {
   defaultFilterRadio.checked = true;
-  effectSlider.setAttribute('disabled', true);
+  effectSliderContainer.classList.add('hidden');
   previewImg.style.filter = 'none';
 };
 
